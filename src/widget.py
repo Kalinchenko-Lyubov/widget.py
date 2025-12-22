@@ -18,3 +18,9 @@ def mask_account_card(account_card: str) -> str:
 
     else:
         return f"{name} {mask_account(number)}"
+
+
+def get_date(timestamp: str) -> str:
+    """Принимает на вход строку с датой в формате "2024-03-11T02:26:18.671407"
+    и возвращает строку с датой в формате "ДД.ММ.ГГГГ" """
+    return f"{timestamp[8:10]}.{timestamp[5:7]}.{timestamp[:4]}"
