@@ -1,5 +1,6 @@
 from src.masks import get_mask_account as mask_account
 from src.masks import get_mask_card_number as mask_card_number
+from datetime import datetime
 
 
 def mask_account_card(account_card: str) -> str:
@@ -20,7 +21,8 @@ def mask_account_card(account_card: str) -> str:
         return f"{name} {mask_account(number)}"
 
 
-def get_date(timestamp: str) -> str:
+def get_date(date_string: str) -> str:
     """Принимает на вход строку с датой в формате "2024-03-11T02:26:18.671407"
     и возвращает строку с датой в формате "ДД.ММ.ГГГГ" """
-    return f"{timestamp[8:10]}.{timestamp[5:7]}.{timestamp[:4]}"
+    dt = datetime.fromisoformat(date_string)
+    return dt.strftime("%d.%m.%Y")
