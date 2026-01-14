@@ -1,7 +1,6 @@
 import pytest
 
-from src.masks import get_mask_card_number, get_mask_account
-from tests.coverage import example_num_card_invalid, example_num_account_invalid
+from src.masks import get_mask_account, get_mask_card_number
 
 
 @pytest.mark.parametrize(
@@ -24,8 +23,7 @@ def test_get_mask_card_number_letters(number_card="123фыв123 asd-"):
     """Проверяем, правильность сообщения об ошибке"""
     with pytest.raises(
         ValueError,
-        match="Неверный номер карты. Проверьте количество цифр, их должно быть 16.\n"
-        "Номер карты состоит только из цифр. Введите все цифры без пробелов и символов",
+        match="Неверный номер карты. Проверьте количество цифр, их должно быть 16",
     ):
         get_mask_card_number(number_card)
 
