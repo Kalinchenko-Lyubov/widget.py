@@ -38,6 +38,3 @@ def get_date(date_string: str) -> str:
     except ValueError as e:
         # Перехватываем ошибки формата/некорректных данных
         raise ValueError(f"Неверный формат даты или некорректные данные: {e}")
-
-
-print(get_date("2024-03-11T02:26:18.671407XYZ"))
