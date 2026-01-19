@@ -72,7 +72,7 @@ def test_sort_by_date_ascending():
 
 
 def test_missing_date_key():
-    """Запись без ключа 'date' — должна вызвать KeyError."""
+    """Запись без ключа 'date' — должна вызвать KeyError"""
     data = [
         {"value": 1},  # нет 'date'
         {"date": "2024-01-01", "value": 2},
