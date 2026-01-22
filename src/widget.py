@@ -9,16 +9,20 @@ def mask_account_card(account_card: str) -> str:
     name = ""
     number = ""
     for symbol in account_card:
-        if symbol.isalpha():
+        if symbol.isalpha() or symbol == " ":
             name += symbol
         elif symbol.isdigit():
             number += symbol
 
-    if name != "Счет":
-        return f"{name} {get_mask_card_number(number)}"
+    if "Счет" not in name:
+        return f"{name}{get_mask_card_number(number.replace(' ',''))}"
 
     else:
-        return f"{name} {get_mask_account(number)}"
+        return f"{name}{get_mask_account(number.replace(' ',''))}"
+
+# print(mask_account_card("Visa Platinum 7000792289606361"))
+
+
 
 
 def get_date(date_string: str) -> str:

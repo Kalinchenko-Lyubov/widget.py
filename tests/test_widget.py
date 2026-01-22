@@ -6,7 +6,7 @@ from src.widget import get_date, mask_account_card
 @pytest.mark.parametrize(
     "account_card, mask_account",
     [
-        ("Visa Platinum 7000792289606361", "VisaPlatinum 7000 79** **** 6361"),
+        ("Visa Platinum 7000792289606361", "Visa Platinum 7000 79** **** 6361"),
         ("Счет 73654108430135874305", "Счет **4305"),
     ],
 )
