@@ -1,20 +1,38 @@
-def filter_by_currency(transactions, currency):
-    """Перебираем словари по ключу currency"""
+from typing import Iterator, Generator
+
+
+def filter_by_currency(transactions: list[dict], currency: str) -> Iterator:
+    """Функция возвращает итератор, который поочередно выдает транзакции по ключу currency"""
     if len(transactions) == 0:
         raise ValueError("Введите данные операции")
 
-    result = filter(lambda x: x["operationAmount"]["currency"]["code"] == currency, transactions)
-    for transaction in result:
+    transactions_cur = [x for x in transactions if x["operationAmount"]["currency"]["code"] == currency]
+    for transaction in transactions_cur:
         yield transaction
 
 
-transactions = {"id": 939719570,"state": "EXECUTED", "date": "2018-06-30T02:08:58.425572", "operationAmount": {
-              "amount": "9824.07", "currency": {"name": "USD", "code": "USD"}
-          }, "description": "Перевод организации", "from": "Счет 75106830613657916952", "to": "Счет 11776614605963066702"
-      }, {"id": 142264268, "state": "EXECUTED", "date": "2019-04-04T23:20:05.206878", "operationAmount":
-                             {"amount": "79114.93", "currency": {"name": "USD", "code": "ESD"}},
-          "description": "Перевод со счета на счет", "from": "Счет 19708645243227258542", "to": "Счет 75651667383060284188"}
+def transaction_descriptions(transactions: list[dict]) -> Iterator:
+    """Функция возвращает описание каждой операции по очереди"""
+    if len(transactions) == 0:
+        raise ValueError("Введите данные операции")
 
-usd_transactions = filter_by_currency(transactions, "USD")
-for _ in range(2):
-    print(next(usd_transactions))
+    for transaction in transactions:
+        if "description" in transaction:
+            yield transaction["description"]
+
+
+def card_number_generator(start: int, stop: int) -> Generator:
+    """Функция выдает номера банковских карт в формате ХХХХ ХХХХ ХХХХ ХХХХ"""
+    if start < 0:
+        raise ValueError("Начальное значение не должно быть отрицательным")
+    if stop < start:
+        raise ValueError("Конечное значение не должно быть меньше начального")
+    if start > 9999999999999999 or stop > 9999999999999999:
+        raise ValueError("Значения должны быть не более 9999999999999999")
+
+    for num in range(start, stop + 1):
+        # Формируем 16‑значное число с ведущими нулями
+        num_str = f"{num:016d}"
+        # Разбиваем на блоки по 4 цифры через пробелы
+        formatted_number = f"{num_str[:4]} {num_str[4:8]} {num_str[8:12]} {num_str[12:]}"
+        yield formatted_number
