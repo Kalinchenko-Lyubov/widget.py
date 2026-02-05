@@ -1,0 +1,2 @@
+my_function ok
+2026-02-05 23:04:15: my_function((1, 2), {}) executed successfully at 2026-02-05 23:04:15. Result: 3
