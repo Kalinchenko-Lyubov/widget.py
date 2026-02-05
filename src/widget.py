@@ -15,14 +15,13 @@ def mask_account_card(account_card: str) -> str:
             number += symbol
 
     if "Счет" not in name:
-        return f"{name}{get_mask_card_number(number.replace(' ',''))}"
+        return f"{name}{get_mask_card_number(number.replace(' ', ''))}"
 
     else:
-        return f"{name}{get_mask_account(number.replace(' ',''))}"
+        return f"{name}{get_mask_account(number.replace(' ', ''))}"
+
 
 # print(mask_account_card("Visa Platinum 7000792289606361"))
-
-
 
 
 def get_date(date_string: str) -> str:
