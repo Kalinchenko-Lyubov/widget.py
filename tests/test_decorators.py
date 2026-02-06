@@ -1,9 +1,9 @@
 import os
 from datetime import time
 
-from src.decorators import log
-
 import pytest
+
+from src.decorators import log
 
 
 @pytest.fixture
@@ -15,9 +15,9 @@ def temp_log_file():
         os.remove(filename)
 
 
-
 def test_success_file_output(temp_log_file):
     """Тестируем успешное выполнение — логи в файл."""
+
     @log(filename=temp_log_file)
     def add(a, b):
         return a + b
@@ -40,6 +40,7 @@ def test_success_file_output(temp_log_file):
 
 def test_error_file_output(temp_log_file):
     """Тестируем ошибку — логи в файл."""
+
     @log(filename=temp_log_file)
     def div(x, y):
         return x / y
@@ -62,6 +63,7 @@ def test_error_file_output(temp_log_file):
 
 def test_success_console_output(capsys):
     """Тестируем успешный вывод в консоль"""
+
     @log()
     def greet(name):
         return f"Hello, {name}!"
@@ -79,14 +81,14 @@ def test_success_console_output(capsys):
     assert "Result: Hello, Alice!" in output
 
 
-
 def test_error_console_output(capsys):
     """Тестируем ошибку — вывод в консоль"""
+
     @log()
     def risky_func(n):
         if n < 0:
             raise ValueError("Negative value")
-        return n ** 0.5
+        return n**0.5
 
     with pytest.raises(ValueError, match="Negative value"):
         risky_func(-1)
@@ -97,7 +99,5 @@ def test_error_console_output(capsys):
     timestamp_str = output[:19]
     time.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
 
-
     assert "risky_func error: ValueError at" in output
     assert "Inputs: (-1,), {}" in output
-
