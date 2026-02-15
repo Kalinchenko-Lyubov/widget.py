@@ -22,4 +22,3 @@ def get_transaction_data(file_path: str) -> List[Dict[str, Any]] | bool:
         return False
 
     return []
-
