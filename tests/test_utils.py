@@ -16,7 +16,7 @@ def test_get_transaction_data_valid_json(mock_file, mock_exists):
 def test_get_transaction_data_invalid_json(mock_file, mock_exists):
     """Тестируем файл с некорректным JSON"""
     result = get_transaction_data("./some/path/data.json")
-    assert result is False
+    assert result == []
 
 
 @patch("os.path.exists", return_value=False)

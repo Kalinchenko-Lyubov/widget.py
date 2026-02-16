@@ -19,6 +19,6 @@ def get_transaction_data(file_path: str) -> List[Dict[str, Any]] | bool:
 
     except json.JSONDecodeError:
         print("Ошибка декодирования файла")
-        return False
+        return []
 
     return []
