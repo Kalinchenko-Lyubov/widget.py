@@ -482,6 +482,17 @@ files = [
 python-dotenv = "*"
 
 [[package]]
+name = "logging"
+version = "0.4.9.6"
+description = "A logging module for Python"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "logging-0.4.9.6.tar.gz", hash = "sha256:26f6b50773f085042d301085bd1bf5d9f3735704db9f37c1ce6d8b85c38f2417"},
+]
+
+[[package]]
 name = "mccabe"
 version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
@@ -789,4 +800,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "33802e27f1b67adc8e184f4780411154b06bc42c5e45cb4e6a862c6b10111422"
+content-hash = "263b460f61b00606e4123e3341c483c0ec45f3fe47bf2a43ad4c21fabcb4fdbc"
