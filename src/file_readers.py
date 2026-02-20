@@ -45,8 +45,3 @@ def transactions_from_excel(path_file_excel: str) -> list[dict[Hashable, Any]] |
     except Exception as ex:
         print(f"Общая ошибка: {ex}")
         return None
-
-
-#
-# if __name__ == "__main__":
-#     print(transactions_from_csv("../data/transactions.csv"))
