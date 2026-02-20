@@ -1,9 +1,11 @@
 import time
+from email.generator import Generator
 from functools import wraps
+from typing import Any
 
 
-def log(filename=None):
-    def decorator(func):
+def log(filename: Any = None) -> Generator:
+    def decorator(func: Any) -> Generator:
         @wraps(func)
         def wrapper(*args, **kwargs):
             start_time = time.strftime("%Y-%m-%d %H:%M:%S")
