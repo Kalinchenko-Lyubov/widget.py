@@ -1,4 +1,5 @@
 import pytest
+import pandas as pd
 
 
 @pytest.fixture
@@ -66,4 +67,22 @@ def example_transactions():
             "from": "Счет 19708645243227258542",
             "to": "Счет 75651667383060284188",
         },
+    )
+
+
+@pytest.fixture
+def sample_df():
+    """Фиктивный DataFrame для замещения данных"""
+    return pd.DataFrame(
+        {
+            "id": ["1", "2"],
+            "state": ["EXECUTED", "CANCELED"],
+            "date": ["2023-09-05T11:30:32Z", "2023-09-05T11:30:32Z"],
+            "amount": [16210, 29740],
+            "currency_name": ["Sol", "Peso"],
+            "currency_code": ["PEN", "COP"],
+            "from": ["Счет 58803664561298323391", "Discover 3172601889670065"],
+            "to": ["Счет 39745660563456619397", "Discover 0720428384694643"],
+            "description": ["Перевод организации", "Перевод с карты на карту"],
+        }
     )
