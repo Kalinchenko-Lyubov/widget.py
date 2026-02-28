@@ -1,5 +1,5 @@
-import pytest
 import pandas as pd
+import pytest
 
 
 @pytest.fixture
@@ -87,13 +87,14 @@ def sample_df():
         }
     )
 
+
 @pytest.fixture
 def bank_data():
     return [
-    {"id": 1, "description": "Оплата товаров"},
-    {"id": 2, "description": "Перечисление зарплаты"},
-    {"id": 3, "description": "Покупка продуктов"},
-    {"id": 4, "description": ""},
-    {"id": 5, "description": "Комиссия банка"},
-    {"id": 6, "description": "ОплатА товАРОВ"}
-]
+        {"id": 1, "description": "Оплата товаров"},
+        {"id": 2, "description": "Перечисление зарплаты"},
+        {"id": 3, "description": "Покупка продуктов"},
+        {"id": 4, "description": ""},
+        {"id": 5, "description": "Комиссия банка"},
+        {"id": 6, "description": "ОплатА товАРОВ"},
+    ]

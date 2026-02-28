@@ -4,7 +4,6 @@ import re
 from collections import Counter
 from typing import Dict, List, Union
 
-os.chdir("..")
 if not os.path.exists("logs"):
     os.makedirs("logs")
 

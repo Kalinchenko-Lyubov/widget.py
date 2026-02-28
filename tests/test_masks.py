@@ -1,6 +1,6 @@
 import pytest
 
-from src.masks import get_mask_account, get_mask_card_number, process_bank_search, process_bank_operations
+from src.masks import get_mask_account, get_mask_card_number, process_bank_operations, process_bank_search
 
 
 @pytest.mark.parametrize(
@@ -58,21 +58,25 @@ def test_positive_match(bank_data):
     assert len(result) == 2
     assert result[0]["id"] == 1
 
+
 def test_negative_match(bank_data):
     """Тест на отрицательный результат"""
     result = process_bank_search(bank_data, "Недвижимость")
     assert len(result) == 0
+
 
 def test_empty_description(bank_data):
     """Тест на обработку пустых описаний"""
     result = process_bank_search(bank_data, "")
     assert len(result) == 0
 
+
 def test_empty_input():
     """Тест на пустой список данных"""
     empty_data = []
     result = process_bank_search(empty_data, "зарплата")
     assert len(result) == 0
+
 
 def test_partial_word_match(bank_data):
     """Тест на совпадающие части слов"""
@@ -87,11 +91,13 @@ def test_exact_match(bank_data):
     result = process_bank_operations(bank_data, categories)
     assert result == {"оплата товаров": 2}
 
+
 def test_non_existing_category(bank_data):
     """Тест на категорию, которой нет среди операций"""
     categories = ["услуги связи"]
     result = process_bank_operations(bank_data, categories)
     assert result == {"услуги связи": 0}
+
 
 def test_multiple_categories(bank_data):
     """Тест на множественные категории"""
@@ -99,12 +105,14 @@ def test_multiple_categories(bank_data):
     result = process_bank_operations(bank_data, categories)
     assert result == {"оплата товаров": 2, "комиссия банка": 1, "покупка продуктов": 1}
 
+
 def test_empty_data():
     """Тест на пустой список данных"""
     empty_data = []
     categories = ["оплата товаров"]
     result = process_bank_operations(empty_data, categories)
     assert result == {"оплата товаров": 0}
+
 
 def test_empty_categories(bank_data):
     """Тест на пустой список категорий"""

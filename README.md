@@ -186,6 +186,8 @@ def process_bank_search(data:list[dict], search:str)->list[dict]
 
 process_bank_operations(data:list[dict], categories:list)->dict
 
+### 17. Функция main в модуле main отвечает за основную логику проекта с пользователем и связывает функциональности между собой
+
 ## Модуль tests 
 
 Содержит тестирование всех функций, 
