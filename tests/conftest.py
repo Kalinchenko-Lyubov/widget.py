@@ -86,3 +86,14 @@ def sample_df():
             "description": ["Перевод организации", "Перевод с карты на карту"],
         }
     )
+
+@pytest.fixture
+def bank_data():
+    return [
+    {"id": 1, "description": "Оплата товаров"},
+    {"id": 2, "description": "Перечисление зарплаты"},
+    {"id": 3, "description": "Покупка продуктов"},
+    {"id": 4, "description": ""},
+    {"id": 5, "description": "Комиссия банка"},
+    {"id": 6, "description": "ОплатА товАРОВ"}
+]

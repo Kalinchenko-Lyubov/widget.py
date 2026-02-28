@@ -52,6 +52,9 @@ def get_mask_account(user_account: Union[int, str]) -> str:
 
 def process_bank_search(data: list[dict], search: str) -> list[dict]:
     """Регулярное выражение, которое ищет строку поиска без учета регистра символов"""
+    if not search.strip():
+        return []
+
     pattern = re.compile(search, re.IGNORECASE)
     result = [item for item in data if "description" in item and pattern.search(item["description"])]
 
@@ -66,6 +69,7 @@ def process_bank_operations(data: List[Dict], categories: List[str]) -> Dict[str
 
     result = {}
     for cat in categories:
-        result[cat] = count.get(cat.lower(), 0)
+        normalized_cat = cat.lower().strip()
+        result[normalized_cat] = count.get(normalized_cat.lower(), 0)
 
     return result

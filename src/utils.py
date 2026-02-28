@@ -3,9 +3,9 @@ import logging
 import os
 from typing import Any, Dict, List
 
-os.chdir("..")
-if not os.path.exists("logs"):
-    os.makedirs("logs")
+# os.chdir("..")
+# if not os.path.exists("logs"):
+#     os.makedirs("logs")
 
 logger = logging.getLogger("utils")
 logger.setLevel(logging.INFO)
