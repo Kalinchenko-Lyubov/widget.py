@@ -32,3 +32,19 @@ def test_get_transaction_data_not_a_list(mock_file, mock_exists):
     """Тестируем случай, когда данные не являются списком"""
     result = get_transaction_data("./some/path/data.json")
     assert result == []
+
+
+@patch("os.path.exists", return_value=True)
+@patch("builtins.open", side_effect=OSError)
+def test_get_transaction_data_os_error(mock_file, mock_exists):
+    """Тестируем ошибку при работе с файлом"""
+    result = get_transaction_data("./some/path/data.json")
+    assert result == []
+
+
+@patch("os.path.exists", return_value=True)
+@patch("builtins.open", new_callable=mock_open, read_data="[]")
+def test_get_transaction_data_empty_list(mock_file, mock_exists):
+    """Тестируем корректный JSON с пустым списком"""
+    result = get_transaction_data("./some/path/data.json")
+    assert result == []

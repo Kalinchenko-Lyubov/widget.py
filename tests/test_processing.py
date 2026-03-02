@@ -1,5 +1,3 @@
-import pytest
-
 from src.processing import filter_by_state
 
 
@@ -25,8 +23,30 @@ def test_filter_by_non_existent():
     assert filter_by_state(list_state, state="CANCELED") == []
 
 
-def test_filter_by_state__no_key():
-    """Тест: в одном из словарей нет ключа 'state' → должно вызвать KeyError"""
-    list_state = [{"id": 1, "state": "EXECUTED"}, {"id": 2}, {"id": 3, "state": "PENDING"}]  # нет ключа 'state'
-    with pytest.raises(KeyError):
-        filter_by_state(list_state, state="CANCELED")
+def test_filter_by_empty_list():
+    """Тест: пустая входная последовательность"""
+    assert filter_by_state([], state="EXECUTED") == []
+
+
+def test_filter_by_missing_state():
+    """Тест: пропуск транзакций без состояния"""
+    list_state = [
+        {"id": 1, "state": "EXECUTED"},
+        {"id": 2},
+        {"id": 3, "state": "CANCELED"},
+        {"id": 4},
+    ]
+    assert filter_by_state(list_state, state="EXECUTED") == [{"id": 1, "state": "EXECUTED"}]
+
+
+def test_filter_by_case_insensitive():
+    """Тест: чувствительность к регистру"""
+    list_state = [
+        {"id": 1, "state": "EXECUTED"},
+        {"id": 2, "state": "executed"},
+        {"id": 3, "state": "CANCELED"},
+    ]
+    assert filter_by_state(list_state, state="EXECUTED") == [
+        {"id": 1, "state": "EXECUTED"},
+        {"id": 2, "state": "executed"},
+    ]

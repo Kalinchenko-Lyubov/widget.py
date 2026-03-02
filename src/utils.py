@@ -3,7 +3,6 @@ import logging
 import os
 from typing import Any, Dict, List
 
-os.chdir("..")
 if not os.path.exists("logs"):
     os.makedirs("logs")
 
@@ -15,7 +14,7 @@ file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
 
-def get_transaction_data(file_path: str) -> List[Dict[str, Any]] | bool:
+def get_transaction_data(file_path: str) -> List[Dict[str, Any]]:
     """Возвращает данные о финансовых транзакциях"""
     logger.info("Выполняем проверку наличия информации о финансовых транзакциях")
 
@@ -32,6 +31,14 @@ def get_transaction_data(file_path: str) -> List[Dict[str, Any]] | bool:
         else:
             logger.error("Данные в файле не являются списком!")
             return []
+
+    except PermissionError:
+        logger.error(f"Ошибка доступа к файлу {file_path}. Недостаточно прав.")
+        return []
+
+    except OSError as err:
+        logger.error(f"Ошибка при работе с файлом {file_path}: {err}")
+        return []
 
     except json.JSONDecodeError:
         logger.error(f"Ошибка декодирования файла {file_path}")

@@ -3,9 +3,15 @@ from datetime import datetime
 from src.masks import get_mask_account, get_mask_card_number
 
 
-def mask_account_card(account_card: str) -> str:
+def mask_account_card(account_card):
     """Возвращает строку с замаскированным номером.
     Для карт и счетов используются разные типы маскировки."""
+    if not isinstance(account_card, str):  # Проверка, что данные являются строкой
+        return "Ошибка: данные не являются строкой"
+
+    if not account_card:  # Проверка на None или пустую строку
+        return "Данные отсутствуют"
+
     name = ""
     number = ""
     for symbol in account_card:
@@ -16,12 +22,8 @@ def mask_account_card(account_card: str) -> str:
 
     if "Счет" not in name:
         return f"{name}{get_mask_card_number(number.replace(' ', ''))}"
-
     else:
         return f"{name}{get_mask_account(number.replace(' ', ''))}"
-
-
-# print(mask_account_card("Visa Platinum 7000792289606361"))
 
 
 def get_date(date_string: str) -> str:
